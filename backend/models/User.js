@@ -1,12 +1,13 @@
-const moongose = require('../db/conn');
-const { Schema } = moongose;
+const mongoose = require('../db/conn');
+const { Schema } = mongoose;
 
 const User = mongoose.model(
     'User',
-    new Schema({
+    new Schema(
+    {
         name: {
             type: String,
-            required
+            required: true
         },
         email: {
             type: String,
@@ -28,4 +29,4 @@ const User = mongoose.model(
     )
 )
 
-modelu.exports = User;
+module.exports = User;

@@ -1,11 +1,11 @@
-const moongose = require('moongose')
+const mongoose = require('mongoose');
 
 
 async function main() {
-    await moongose.connect('mongodb://localhost:27017/getapet');
+    await mongoose.connect('mongodb://localhost:27017/getapet');
     console.log('Conectou ao Mongoose!');
 }
 
 main().catch(err => console.log(err))
 
-module.exports =  moongose;
+module.exports =  mongoose;
