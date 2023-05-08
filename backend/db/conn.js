@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 
 async function main() {
-    await mongoose.connect('mongodb://localhost:27017/getapet');
+    mongoose.set('strictQuery', true)
+    await mongoose.connect('mongodb://127.0.0.1:27017/get_a_pet');
     console.log('Conectou ao Mongoose!');
 }
 

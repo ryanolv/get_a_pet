@@ -17,5 +17,5 @@ const UserRoutes = require('./routes/UserRoutes');
 app.use('/users', UserRoutes);
 
 app.listen(5000, () => {
-    console.log('Server is running')
+    console.log('Server is running in port 5000')
 })
