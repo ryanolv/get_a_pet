@@ -136,8 +136,6 @@ module.exports = class UserController {
     
     static async editUser(request, response) {
         
-        const id = request.params.id;
-        
         // check if user exists
         const token = getToken(request);
         const user = await getUserByToken(token)
@@ -173,21 +171,22 @@ module.exports = class UserController {
             response.status(422).json({ message: 'O telefone é obrigatório;' })
             return
         }
-        if(!password) {
-            response.status(422).json({ message: 'A senha é obrigatória' })
-            return
-        }
-        if(!confirmpassword) {
-            response.status(422).json({ message: 'A confirmação de senha é obrigatória' })
-            return
-        }
-        if(password !== confirmpassword) {
-            response.status(422).json({ message: 'Verifique a confirmação de senha'})
-            return
-        }
+
+        user.phone = phone;
+
+        if(password != confirmpassword) {
+            return response.status(422).json({ message: 'As senhas não conferem'})
+        } else if(password === confirmpassword && password != null) {
+
+            // creating password
+            const salt = await bcrypt.genSalt(12);
+            const passwordHash = await bcrypt.hash(password, salt);
+
+            user.password = passwordHash;
+        } 
+    
 
 
-       
 
     }
 
