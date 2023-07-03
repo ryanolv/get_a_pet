@@ -142,9 +142,12 @@ module.exports = class UserController {
 
         const { name, email, phone, password, confirmpassword } = request.body;
         
-        let image = '';
-
+        
         // validations
+        if(request.file) {
+            user.image = request.file.filename;
+        }
+
         if(!name) {
             response.status(422).json({ message: 'O nome é obrigatório' })
             return
@@ -184,6 +187,21 @@ module.exports = class UserController {
 
             user.password = passwordHash;
         } 
+
+        try {
+            // return user updated data
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: user._id},
+                {$set: user},
+                { new: true },
+            )
+
+            response.status(200).json({ message: 'Usuário atualizado com sucesso.'});
+        } catch(error) {
+
+            response.status(500).json({ message: error })
+            return
+        }
     
 
 

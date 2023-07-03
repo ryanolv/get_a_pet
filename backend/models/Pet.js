@@ -1,5 +1,5 @@
-const moongose = require('../db/conn');
-const { Schema } = moongose;
+const mongoose = require('../db/conn');
+const { Schema } = mongoose;
 
 const Pet = mongoose.model(
     'Pet',
@@ -35,4 +35,4 @@ const Pet = mongoose.model(
     )
 )
 
-modelu.exports = Pet;
+module.exports = Pet;
